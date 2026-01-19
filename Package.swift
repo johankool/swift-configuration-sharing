@@ -32,6 +32,10 @@ let package = Package(
                 .product(name: "Sharing", package: "swift-sharing"),
                 .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
                 .product(name: "Logging", package: "swift-log")
+            ],
+            linkerSettings: [
+                // Workaround for Swift 6.2 Linux linking: Observation depends on swiftThreading
+                .unsafeFlags(["-lswiftThreading"], .when(platforms: [.linux]))
             ]
         ),
         .testTarget(
@@ -39,6 +43,10 @@ let package = Package(
             dependencies: [
                 "ConfigurationSharing",
                 .product(name: "Dependencies", package: "swift-dependencies")
+            ],
+            linkerSettings: [
+                // Ensure tests link swiftThreading on Linux to satisfy libswiftObservation
+                .unsafeFlags(["-lswiftThreading"], .when(platforms: [.linux]))
             ]
         )
     ]
