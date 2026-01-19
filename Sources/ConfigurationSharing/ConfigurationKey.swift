@@ -3,9 +3,10 @@ import Dependencies
 import Foundation
 import Sharing
 
-// Workaround for Swift 6.2 Linux linking issue with Observation framework
+// Workaround for Swift 6.2 Linux/Android linking issue with Observation framework
 // See: https://github.com/swiftlang/swift/pull/77890
-#if os(Linux)
+// See: https://github.com/apple/swift-configuration/pull/140
+#if os(Linux) || os(Android)
 @_cdecl("_ZN5swift9threading5fatalEPKcz")
 func swiftThreadingFatal() { }
 #endif
