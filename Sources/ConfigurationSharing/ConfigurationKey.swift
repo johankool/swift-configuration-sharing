@@ -3,6 +3,13 @@ import Dependencies
 import Foundation
 import Sharing
 
+// Workaround for Swift 6.2 Linux linking issue with Observation framework
+// See: https://github.com/swiftlang/swift/pull/77890
+#if os(Linux)
+@_cdecl("_ZN5swift9threading5fatalEPKcz")
+func swiftThreadingFatal() { }
+#endif
+
 /// A sharing key that reads and observes values from a `ConfigReader`.
 ///
 /// This key integrates the Swift Configuration library with the Swift Sharing library,
