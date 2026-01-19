@@ -4,10 +4,11 @@ import PackageDescription
 let package = Package(
     name: "ConfigurationSharing",
     platforms: [
-        .iOS(.v17),
+        .iOS(.v18),
         .macOS(.v15),
-        .tvOS(.v13),
-        .watchOS(.v6)
+        .tvOS(.v18),
+        .watchOS(.v11),
+        .visionOS(.v2)
     ],
     products: [
         .library(
